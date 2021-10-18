@@ -1,0 +1,11 @@
+.btn {
+  background: var(--bg-color-alt-btn);
+  cursor: pointer;
+  border: 0px;
+  border-radius: var(--border-radius-size);
+  color: var(--white);
+}
+
+.btn:active {
+  background: var(--bg-color-alt-btn-active);
+}

@@ -1,0 +1,9 @@
+.card-hero-header__btn {
+  width: 10%;
+  height: 60%;
+  font-size: 1rem;
+}
+
+.pressed-btn {
+  opacity: 0.7;
+}

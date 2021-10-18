@@ -1,0 +1,33 @@
+.choose-list {
+  flex-basis: 30%;
+  padding: 15px 10px;
+  background: var(--bg-color-wrap-btn);
+  border: 2px solid var(--color-border-wrap-btn);
+  border-radius: var(--border-radius-size);
+}
+
+.choose-list__text {
+  font-size: 1rem;
+}
+
+.choose-list__btn {
+  cursor: pointer;
+  opacity: 0.7;
+  padding: 10px 10px;
+  font-size: 1rem;
+}
+
+.dividing-line {
+  width: 5px;
+  height: 100%;
+  background: #47474744;
+  border-radius: var(--border-radius-size);
+}
+
+.choose-list__btn:active {
+  background: var(--bg-color-alt-btn-active);
+}
+
+.currentList {
+  opacity: 1;
+}
