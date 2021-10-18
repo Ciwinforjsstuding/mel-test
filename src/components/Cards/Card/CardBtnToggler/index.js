@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import './card-btn-toggler.css';
 
-import { FAVORIT } from '../../../../store/constants';
+import { FAVORIT, SHOW_LIST } from '../../../../store/constants';
 import Button from '../../../../UI/Button';
 
 import {
@@ -37,6 +37,15 @@ class CardBtnToggler extends React.Component {
       });
       this.togglerIsPressed();
     }
+    if (
+      this.state.isPressed &&
+      this.props.whichShowList === FAVORIT
+    ) {
+      this.props.removeItemForKey({
+        key: SHOW_LIST,
+        elem: this.props.hero,
+      });
+    }
     if (!this.state.isPressed) {
       this.props.addToFavorit(this.props.hero);
       this.togglerIsPressed();
@@ -60,4 +69,11 @@ const mapDispatchToProps = {
   removeItemForKey,
 };
 
-export default connect(null, mapDispatchToProps)(CardBtnToggler);
+const mapStateToProps = state => ({
+  whichShowList: state.starWars.whichShowList,
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardBtnToggler);

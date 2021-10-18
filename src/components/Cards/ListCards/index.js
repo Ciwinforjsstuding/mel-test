@@ -3,10 +3,18 @@ import { connect } from 'react-redux';
 import { fetchHeroesStarWar } from '../../../store/StarWars/starWarsSlice';
 
 import ChooseList from '../../ChooseListBtn';
+import EmptyFavoritList from '../EmptyFavoritList';
 import SortBtn from '../../SortBtn';
 import Card from '../Card';
 import Loader from '../../Loader';
 import './list-card.css';
+
+const WrapForCondition = ({ showList }) =>
+  !showList.length ? (
+    <EmptyFavoritList />
+  ) : (
+    showList.map(hero => <Card key={hero.name} hero={hero} />)
+  );
 
 const ListCards = ({
   loading,
@@ -26,7 +34,7 @@ const ListCards = ({
       {loading ? (
         <Loader />
       ) : (
-        showList.map(hero => <Card key={hero.name} hero={hero} />)
+        <WrapForCondition showList={showList} />
       )}
     </div>
   );
