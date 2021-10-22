@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { fetchHeroesStarWar } from '../../../store/StarWars/starWarsSlice';
 
@@ -16,29 +16,31 @@ const WrapForCondition = ({ showList }) =>
     showList.map(hero => <Card key={hero.name} hero={hero} />)
   );
 
-const ListCards = ({
-  loading,
-  showList,
-  currentPage,
-  fetchHeroesStarWar,
-}) => {
-  useEffect(() => {
-    fetchHeroesStarWar(currentPage);
-  }, [currentPage, fetchHeroesStarWar]);
-  return (
-    <div className="list-cards flex flex-column">
-      <div className="list-cards-btns flex item-center justify-between">
-        <SortBtn />
-        <ChooseList />
+class ListCards extends React.Component {
+  componentDidMount() {
+    this.props.fetchHeroesStarWar(this.props.currentPage);
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentPage !== this.props.currentPage) {
+      this.props.fetchHeroesStarWar(this.props.currentPage);
+    }
+  }
+  render() {
+    return (
+      <div className="list-cards flex flex-column">
+        <div className="list-cards-btns flex item-center justify-between">
+          <SortBtn />
+          <ChooseList />
+        </div>
+        {this.props.loading ? (
+          <Loader />
+        ) : (
+          <WrapForCondition showList={this.props.showList} />
+        )}
       </div>
-      {loading ? (
-        <Loader />
-      ) : (
-        <WrapForCondition showList={showList} />
-      )}
-    </div>
-  );
-};
+    );
+  }
+}
 
 const mapStateToProps = state => ({
   showList: state.starWars.showList,
